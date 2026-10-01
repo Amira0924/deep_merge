@@ -31,3 +31,10 @@ The other deliberate choice is how `None` is handled. A `None` value in the sour
 - **Mutable non-dict values** (lists, sets) in the source are stored in the result by reference. Mutating the result's list will mutate the source's list. This is intentional and documented; copy before merging if you need isolation.
 - **`None` over a dict** deletes the whole dict, because deletion is checked before the recursive-mapping branch. This is the point of the rule — `None` means "remove", not "replace with null".
 - The **destination is never mutated**. Nested dicts that survive into the result are shallow-copied so writes into the result do not leak back into the destination.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
