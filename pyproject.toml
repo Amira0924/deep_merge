@@ -1,6 +1,6 @@
 [project]
 name = "deep-merge"
-version = "0.1.0"
+version = "0.1.1"
 description = "Merge nested mappings with explicit rules for lists and nulls."
 requires-python = ">=3.10"
 dependencies = []
